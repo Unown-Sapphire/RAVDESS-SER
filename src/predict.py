@@ -12,7 +12,7 @@ n_mels = 128
 max_samples = 3 * sr
 max_frames = math.ceil(max_samples / hop_length)
 
-# Label maps (EDIT if your order differs)
+
 emotion_map = {
     0: "Neutral",
     1: "Calm",
@@ -68,7 +68,6 @@ def process_file(path):
 
     log_mel = librosa.power_to_db(mel, ref=np.max)
 
-    # IMPORTANT: Use SAME normalization you used in training
     log_mel = (log_mel - np.mean(log_mel)) / (np.std(log_mel) + 1e-6)
 
     log_mel = np.expand_dims(log_mel, axis=-1)
@@ -97,3 +96,4 @@ if __name__ == "__main__":
     print("\nPrediction:")
     print("Emotion:", emotion_map[emotion_idx])
     print("Gender:", gender_map[gender_idx])
+
